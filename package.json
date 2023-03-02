@@ -1,5 +1,8 @@
 {
-  "name": "ink-table",
+  "name": "@alcalzone/ink-table",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.0.0-development",
   "description": "A table component for Ink.",
   "main": "dist/index.js",
