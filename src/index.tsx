@@ -30,6 +30,10 @@ export type TableProps<T extends ScalarDict> = {
    */
   columns: (keyof T | AllColumnProps<T>)[]
   /**
+	 * Replacement headings for keys in data.
+	 */
+	headings: Partial<Record<keyof T, string>>;
+  /**
    * Cell padding.
    */
   padding: number
@@ -61,6 +65,7 @@ export class Table<T extends ScalarDict> extends React.Component<
     return {
       data: this.props.data,
       columns: this.props.columns || this.getDataKeys(),
+      headings: this.props.headings || {},
       padding: this.props.padding || 1,
       header: this.props.header || Header,
       cell: this.props.cell || Cell,
@@ -132,7 +137,7 @@ export class Table<T extends ScalarDict> extends React.Component<
     )
 
     const headings: Partial<T> = columns.reduce(
-      (acc, column) => ({ ...acc, [column]: column }),
+      (acc, column) => ({ ...acc, [column]: this.getConfig().headings[column] ?? column }),
       {} as Partial<T>,
     )
 
